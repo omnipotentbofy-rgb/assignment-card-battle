@@ -2,11 +2,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Turn — Нэг ээлжийн snapshot (Stretch).
- *
- * Тоглоомын явцыг log хийх, save/replay-д ашиглана.
- */
 public class Turn {
 
     private final int turnNumber;
@@ -19,14 +14,13 @@ public class Turn {
         this.actionsLog = new ArrayList<>();
     }
 
-    /** Ээлжийн үйлдлийг бүртгэнэ. */
     public void logAction(String action) {
         actionsLog.add(action);
     }
 
-    public int getTurnNumber()         { return turnNumber; }
-    public String getActivePlayerName(){ return activePlayerName; }
-    public List<String> getActionsLog(){ return Collections.unmodifiableList(actionsLog); }
+    public int getTurnNumber()          { return turnNumber; }
+    public String getActivePlayerName() { return activePlayerName; }
+    public List<String> getActionsLog() { return Collections.unmodifiableList(actionsLog); }
 
     @Override
     public String toString() {

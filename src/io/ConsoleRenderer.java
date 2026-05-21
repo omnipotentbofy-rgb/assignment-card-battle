@@ -1,13 +1,7 @@
 import java.util.List;
 
-/**
- * ConsoleRenderer — Тоглоомын UI layer.
- *
- * HP bar, мана кристал, карт ASCII box, баннер бүгдийг зурна.
- */
 public class ConsoleRenderer {
 
-    // ANSI өнгүүд
     private static final String RESET  = "\u001B[0m";
     private static final String RED    = "\u001B[91m";
     private static final String GREEN  = "\u001B[92m";
@@ -15,8 +9,6 @@ public class ConsoleRenderer {
     private static final String CYAN   = "\u001B[96m";
     private static final String BOLD   = "\u001B[1m";
     private static final String DIM    = "\u001B[2m";
-
-    // ── Game state ────────────────────────────────────────────────────────────
 
     public void render(Game game) {
         clearScreen();
@@ -40,8 +32,8 @@ public class ConsoleRenderer {
     }
 
     public void renderPlayer(Player p) {
-        String hpBar   = buildBar(p.getHp(),   p.getMaxHp(),   20, '█', '░');
-        String manaBar = buildBar(p.getMana(),  p.getMaxMana(), 10, '◆', '◇');
+        String hpBar   = buildBar(p.getHp(),  p.getMaxHp(),  20, '█', '░');
+        String manaBar = buildBar(p.getMana(), p.getMaxMana(), 10, '◆', '◇');
         String hpColor = p.getHp() <= 10 ? RED : GREEN;
 
         System.out.printf("  %s%-16s%s  HP: %s%s%s %d/%d   Мана: %s%s%s %d/%d%n",
@@ -72,31 +64,23 @@ public class ConsoleRenderer {
             return;
         }
         System.out.println();
-        // Print cards side-by-side as ASCII boxes
         int cols = Math.min(hand.size(), 5);
         String[] lines = new String[6];
         for (int i = 0; i < lines.length; i++) lines[i] = "";
 
         for (int i = 0; i < cols; i++) {
-            Card c = hand.get(i);
-            String[] box = buildCardBox(i, c);
-            for (int l = 0; l < 6; l++) {
-                lines[l] += box[l] + "  ";
-            }
+            String[] box = buildCardBox(i, hand.get(i));
+            for (int l = 0; l < 6; l++) lines[l] += box[l] + "  ";
         }
         for (String line : lines) System.out.println("  " + line);
 
-        // If more than 5 cards, print remaining below
         if (hand.size() > cols) {
             System.out.println();
             String[] lines2 = new String[6];
             for (int i = 0; i < lines2.length; i++) lines2[i] = "";
             for (int i = cols; i < hand.size(); i++) {
-                Card c = hand.get(i);
-                String[] box = buildCardBox(i, c);
-                for (int l = 0; l < 6; l++) {
-                    lines2[l] += box[l] + "  ";
-                }
+                String[] box = buildCardBox(i, hand.get(i));
+                for (int l = 0; l < 6; l++) lines2[l] += box[l] + "  ";
             }
             for (String line : lines2) System.out.println("  " + line);
         }
@@ -109,13 +93,12 @@ public class ConsoleRenderer {
             case RARE      -> CYAN;
             default        -> RESET;
         };
-        String name = truncate(c.getName(), 14);
-        String desc = truncate(c.getDescription(), 14);
-        String mana = "Мана: " + c.getManaCost();
+        String name  = truncate(c.getName(), 14);
+        String mana  = "Мана: " + c.getManaCost();
         String extra = "";
-        if (c instanceof AttackCard ac)  extra = "DMG:  " + ac.getDamage();
-        else if (c instanceof HealCard hc) extra = "Heal: " + hc.getHealAmount();
-        else if (c instanceof BuffCard bc) extra = "Buff: +" + bc.getBuffAmount();
+        if (c instanceof AttackCard ac)        extra = "DMG:  " + ac.getDamage();
+        else if (c instanceof HealCard hc)     extra = "Heal: " + hc.getHealAmount();
+        else if (c instanceof BuffCard bc)     extra = "Buff: +" + bc.getBuffAmount();
         else if (c instanceof CreatureCard cc) extra = "HP/ATK:" + cc.getHealth() + "/" + cc.getAttackPower();
 
         return new String[]{
@@ -127,8 +110,6 @@ public class ConsoleRenderer {
             String.format("└──────────────────┘")
         };
     }
-
-    // ── Messages ──────────────────────────────────────────────────────────────
 
     public void showError(String message) {
         System.out.println(RED + "  ✗ " + message + RESET);
@@ -158,8 +139,6 @@ public class ConsoleRenderer {
         System.out.println();
     }
 
-    // ── ASCII animation ───────────────────────────────────────────────────────
-
     public void animateCardPlay(Card card) {
         System.out.println();
         System.out.println(BOLD + "  ✨ " + card.getName() + " тоглогдож байна..." + RESET);
@@ -175,8 +154,6 @@ public class ConsoleRenderer {
             Thread.currentThread().interrupt();
         }
     }
-
-    // ── Helpers ───────────────────────────────────────────────────────────────
 
     private String buildBar(int current, int max, int width, char full, char empty) {
         if (max <= 0) return String.valueOf(empty).repeat(width);

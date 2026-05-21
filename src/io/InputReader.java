@@ -1,10 +1,5 @@
 import java.util.Scanner;
 
-/**
- * InputReader — Console оролтын wrapper.
- *
- * Буруу оролтод хэзээ ч crash хийхгүй — эелдэгээр дахин асуудаг.
- */
 public class InputReader {
 
     private final Scanner scanner;
@@ -13,10 +8,6 @@ public class InputReader {
         this.scanner = new Scanner(System.in);
     }
 
-    /**
-     * [min, max] хязгаарт байх int уншина.
-     * Буруу оролт бол дахин асуух.
-     */
     public int readInt(String prompt, int min, int max) {
         while (true) {
             System.out.print(prompt);
@@ -33,17 +24,11 @@ public class InputReader {
         }
     }
 
-    /** Мөр уншина. */
     public String readString(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }
 
-    /**
-     * Тийм/үгүй хариулт уншина.
-     * "y", "yes", "тийм", "т", "1" → true
-     * "n", "no", "үгүй", "ү", "0" → false
-     */
     public boolean readYesNo(String prompt) {
         while (true) {
             System.out.print(prompt + " (т/ү): ");

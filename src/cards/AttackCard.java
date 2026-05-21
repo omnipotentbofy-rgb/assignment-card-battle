@@ -1,20 +1,7 @@
-/**
- * AttackCard — Дайсан руу хохирол учруулах карт.
- *
- * Тоглогдох үед opponent.takeDamage(damage) дуудна.
- * Хэрэв self-д nextAttackBonus байвал тэрийг нэмж хэрэглэнэ.
- */
 public class AttackCard extends Card {
 
     private final int damage;
 
-    /**
-     * @param name        Картны нэр
-     * @param manaCost    Манын зардал
-     * @param description Тайлбар
-     * @param rarity      Ховор байдал
-     * @param damage      Учруулах хохирол
-     */
     public AttackCard(String name, int manaCost, String description, Rarity rarity, int damage) {
         super(name, manaCost, description, rarity);
         if (damage < 0) {

@@ -1,19 +1,7 @@
-/**
- * HealCard — Өөрийгөө эдгээх карт.
- *
- * Тоглогдох үед self.heal(healAmount) дуудна.
- */
 public class HealCard extends Card {
 
     private final int healAmount;
 
-    /**
-     * @param name        Картны нэр
-     * @param manaCost    Манын зардал
-     * @param description Тайлбар
-     * @param rarity      Ховор байдал
-     * @param healAmount  Эдгээх хэмжээ
-     */
     public HealCard(String name, int manaCost, String description, Rarity rarity, int healAmount) {
         super(name, manaCost, description, rarity);
         if (healAmount < 0) {

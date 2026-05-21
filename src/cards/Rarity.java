@@ -1,9 +1,5 @@
-/**
- * Rarity — Картны ховор байдлын түвшин.
- * Тоглоомын баланс: COMMON → RARE → LEGENDARY (хүч нэмэгдэнэ)
- */
 public enum Rarity {
-    COMMON,    // Хамгийн түгээмэл карт
-    RARE,      // Ховор, илүү хүчтэй
-    LEGENDARY  // Домогт — тоглоомд 1-2-оос илүү байхгүй
+    COMMON,
+    RARE,
+    LEGENDARY
 }

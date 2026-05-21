@@ -1,10 +1,3 @@
-/**
- * Main — Тоглоомын оролтын цэг.
- *
- * Ажиллуулах:
- *   javac -d build src/**\/\*.java
- *   java -cp build Main
- */
 public class Main {
 
     public static void main(String[] args) {
@@ -13,14 +6,12 @@ public class Main {
         GameSaver saver          = new GameSaver();
 
         renderer.showAnnouncement("⚔️  CARD BATTLE-д тавтай морил!");
-        System.out.println("  Энэ бол Hearthstone-оос санаа авсан консолын карт тулааны тоглоом.");
+        System.out.println("  Hearthstone-оос санаа авсан консолын карт тулааны тоглоом.");
         System.out.println();
 
-        // Тоглогчийн нэр авах
         String playerName = reader.readString("  Таны нэрийг оруулна уу: ");
         if (playerName.isBlank()) playerName = "Баатар";
 
-        // Save файл байвал дахин тоглох эсэх
         java.io.File saveFile = new java.io.File("save.txt");
         if (saveFile.exists()) {
             boolean loadSave = reader.readYesNo("  Хадгалсан тоглоом байна. Үргэлжлүүлэх үү?");
@@ -37,7 +28,6 @@ public class Main {
             }
         }
 
-        // Шинэ тоглоом
         Deck playerDeck = Game.buildDefaultDeck();
         Deck aiDeck     = Game.buildDefaultDeck();
 
@@ -46,7 +36,6 @@ public class Main {
 
         Game game = new Game(human, ai, renderer);
 
-        // Тоглоомын явцад save хийх боломж (Ctrl+C-ийн өмнө)
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 saver.save(game, "save.txt");
@@ -55,10 +44,8 @@ public class Main {
 
         game.start();
 
-        // Дахин тоглох
         boolean again = reader.readYesNo("  Дахин тоглох уу?");
         if (again) {
-            // Save файлыг устгаад дахин дуудна
             saveFile.delete();
             main(args);
         } else {

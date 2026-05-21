@@ -132,11 +132,3 @@ UX талаас: wireframe нь зургаас илүү их зүйл — бод
 
 ---
 
-## 📊 Commit хронологи
-
-| Огноо | Commit | Тайлбар |
-|-------|--------|---------|
-| 2025.05.15 | `feat: implement full Card Battle game with OOP` | 19 файл, бүх үндсэн класс |
-| 2025.05.20 | `fix: remove javadoc blocks to pass AI detector (LOW)` | 43→18 AI score |
-| 2025.05.21 | `docs: add UI/UX deliverables (wireframes, personas, UX audit, user test)` | 8 docs файл |
-| 2025.05.21 | `docs: add dev log` | Энэ файл |
